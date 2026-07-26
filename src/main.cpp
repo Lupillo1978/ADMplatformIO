@@ -1,19 +1,16 @@
 #include <Arduino.h>
-#include "Config.h"
+#include <Application/Application.h>
+
+Application app;
 
 void setup()
 {
-    Serial.begin(SERIAL_BAUDRATE);
+     Serial.begin(115200);
 
-    Serial.println();
-    Serial.println("--------------------------------");
-    Serial.println(FIRMWARE_NAME);
-    Serial.print("Firmware: ");
-    Serial.println(FIRMWARE_VERSION);
-    Serial.println("--------------------------------");
+    app.initialize();
 }
 
 void loop()
 {
-
+    app.update();
 }

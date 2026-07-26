@@ -1,0 +1,41 @@
+#include <Arduino.h>
+#include <Core/FirmwareCore.h>
+
+void FirmwareCore::initialize()
+{
+    if (!rtc.initialize())
+    {
+        Serial.println("ERROR: RTC initialization failed");
+    }
+    else
+    {
+        Serial.println("RTC initialized successfully");
+    }
+
+    if (!motors.initialize())
+    {
+        Serial.println("ERROR: MotorController initialization failed");
+    }
+    else
+    {
+        Serial.println("MotorController initialized successfully");
+    }
+
+    if (!scheduler.initialize())
+    {
+        Serial.println("ERROR: Scheduler initialization failed");
+    }
+    else
+    {
+        Serial.println("Scheduler initialized successfully");
+    }
+}
+
+void FirmwareCore::update()
+{
+    rtc.update();
+
+    scheduler.update();
+
+    motors.update();
+}
