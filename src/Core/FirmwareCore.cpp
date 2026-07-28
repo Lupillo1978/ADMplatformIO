@@ -38,4 +38,22 @@ void FirmwareCore::update()
     scheduler.update();
 
     motors.update();
+
+    switch (feederState)
+    {
+    case FeederState::IDLE:
+        break;
+
+    case FeederState::START_SPRAYER:
+        break;
+
+    case FeederState::START_DOSIFIER:
+        break;
+
+    case FeederState::STOP_DOSIFIER:
+        break;
+
+    case FeederState::STOP_SPRAYER:
+        break;
+    }
 }

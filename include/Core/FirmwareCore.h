@@ -4,6 +4,7 @@
 #include <RTC/RTCManager.h>
 #include <Motor/MotorController.h>
 #include <Scheduler/Scheduler.h>
+#include <Feeding/FeederState.h>
 
 
 class FirmwareCore
@@ -21,6 +22,10 @@ private:
     MotorController motors;
 
     Scheduler scheduler;
+
+    FeederState feederState = FeederState::IDLE;
+
+    FeedEvent* currentEvent = nullptr;
 };
 
 #endif
