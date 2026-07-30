@@ -3,7 +3,7 @@
 
 void FirmwareCore::initialize()
 {
-    if (!rtc.initialize())
+    if (!rtc.begin())
     {
         Serial.println("ERROR: RTC initialization failed");
     }
