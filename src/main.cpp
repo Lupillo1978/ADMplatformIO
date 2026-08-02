@@ -1,5 +1,4 @@
 
-
 /***************************************************************************
  * Descripción:
  * Punto de entrada principal del firmware.
