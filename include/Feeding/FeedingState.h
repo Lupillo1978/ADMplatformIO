@@ -1,0 +1,23 @@
+#ifndef FEEDING_STATE_H
+#define FEEDING_STATE_H
+
+enum class FeedingState
+{
+    IDLE,
+
+    START_SPRAYER,
+
+    WAIT_SPRAYER,
+
+    START_DOSIFIER,
+
+    RUNNING_DOSIFIER,
+
+    STOP_DOSIFIER,
+
+    WAIT_STOP_SPRAYER,
+
+    STOP_SPRAYER
+};
+
+#endif

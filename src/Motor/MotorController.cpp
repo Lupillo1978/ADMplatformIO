@@ -28,6 +28,9 @@ void MotorController::update()
 
 void MotorController::startDosificador()
 {
+    if (dosificadorRunning)
+        return;
+
     digitalWrite(
         PinConfig::MOTOR_DOSIFICADOR,
         HIGH
@@ -38,6 +41,9 @@ void MotorController::startDosificador()
 
 void MotorController::stopDosificador()
 {
+    if (!dosificadorRunning)
+        return;
+
     digitalWrite(
         PinConfig::MOTOR_DOSIFICADOR,
         LOW
@@ -48,6 +54,9 @@ void MotorController::stopDosificador()
 
 void MotorController::startAspersor()
 {
+    if (aspersorRunning)
+        return;
+
     digitalWrite(
         PinConfig::MOTOR_ASPERSOR,
         HIGH
@@ -58,6 +67,9 @@ void MotorController::startAspersor()
 
 void MotorController::stopAspersor()
 {
+    if (!aspersorRunning)
+        return;
+
     digitalWrite(
         PinConfig::MOTOR_ASPERSOR,
         LOW
@@ -81,4 +93,9 @@ bool MotorController::isDosificadorRunning() const
 bool MotorController::isAspersorRunning() const
 {
     return aspersorRunning;
+}
+
+bool MotorController::isBusy() const
+{
+    return dosificadorRunning || aspersorRunning;
 }

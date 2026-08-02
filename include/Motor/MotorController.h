@@ -23,6 +23,8 @@ public:
 
     bool isAspersorRunning() const;
 
+    bool isBusy() const;
+
 private:
 
     bool dosificadorRunning = false;

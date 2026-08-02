@@ -1,6 +1,10 @@
 #include <Arduino.h>
 #include <Core/FirmwareCore.h>
 
+static bool firstFeedExecuted = false;
+
+static uint32_t startupTime = 0;
+
 void FirmwareCore::initialize()
 {
     if (!rtc.begin())
@@ -21,6 +25,15 @@ void FirmwareCore::initialize()
         Serial.println("MotorController initialized successfully");
     }
 
+    if (!feedingEngine.initialize(&motors))
+    {
+        Serial.println("ERROR: FeedingEngine initialization failed");
+    }
+    else
+    {
+        Serial.println("FeedingEngine initialized successfully");
+    }
+
     if (!scheduler.initialize())
     {
         Serial.println("ERROR: Scheduler initialization failed");
@@ -29,6 +42,8 @@ void FirmwareCore::initialize()
     {
         Serial.println("Scheduler initialized successfully");
     }
+
+    startupTime = millis();
 }
 
 void FirmwareCore::update()
@@ -37,23 +52,22 @@ void FirmwareCore::update()
 
     scheduler.update();
 
+    feedingEngine.update();
+
     motors.update();
 
-    switch (feederState)
+    if (!firstFeedExecuted)
     {
-    case FeederState::IDLE:
-        break;
+        if (millis() - startupTime >= 5000)
+        {
+            Serial.println();
+            Serial.println("================================");
+            Serial.println("STARTING TEST FEED");
+            Serial.println("================================");
 
-    case FeederState::START_SPRAYER:
-        break;
+            feedingEngine.startFeed(8.0f);
 
-    case FeederState::START_DOSIFIER:
-        break;
-
-    case FeederState::STOP_DOSIFIER:
-        break;
-
-    case FeederState::STOP_SPRAYER:
-        break;
+            firstFeedExecuted = true;
+        }
     }
 }

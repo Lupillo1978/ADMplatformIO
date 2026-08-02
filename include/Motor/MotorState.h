@@ -1,0 +1,23 @@
+#ifndef MOTOR_STATE_H
+#define MOTOR_STATE_H
+
+enum class MotorState
+{
+    IDLE,
+
+    START_SPRAYER,
+
+    WAIT_BEFORE_DOSIFIER,
+
+    START_DOSIFIER,
+
+    DOSIFIER_RUNNING,
+
+    STOP_DOSIFIER,
+
+    WAIT_BEFORE_STOP_SPRAYER,
+
+    STOP_SPRAYER
+};
+
+#endif
